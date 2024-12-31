@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Order</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Update Order</h1>
+        <form id="update-order-form">
+            <input type="number" id="orderId" placeholder="Order ID" required>
+            <input type="text" id="customerName" placeholder="Customer Name">
+            <input type="text" id="item" placeholder="Item">
+            <input type="number" id="quantity" placeholder="Quantity">
+            <input type="text" id="status" placeholder="Status">
+            <button type="submit">Update Order</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('update-order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const orderId = document.getElementById('orderId').value;
+            const customerName = document.getElementById('customerName').value;
+            const item = document.getElementById('item').value;
+            const quantity = document.getElementById('quantity').value;
+            const status = document.getElementById('status').value;
+
+            fetch(`/api/orders/${orderId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ customerName, item, quantity, status })
+            })
+            .then(response => response.json())
+            .then(data => alert('Order updated: ' + JSON.stringify(data)))
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>

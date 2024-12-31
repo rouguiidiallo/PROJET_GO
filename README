@@ -1,0 +1,54 @@
+# ROUGUIYATOU'S RESTAURANT MANAGEMENT ORDER
+
+Je me suis amusée à faire une petite application de gestion de commande de mon restaurant (virtuel -- une activité que je faisais comme job étudiant). 
+Développée en Go (backend). Elle permet de créer, lire, mettre à jour et supprimer des commandes via une API RESTful. L'application utilise SQLite comme base de données pour stocker les informations des commandes.
+
+## Fonctionnalités
+
+- **Créer une commande** : Permet de créer une nouvelle commande avec le nom du client, l'article, la quantité et le statut.
+
+- **Lire une commande** : Permet de récupérer les détails d'une commande spécifique en utilisant son identifiant.
+
+- **Mettre à jour une commande** : Permet de mettre à jour les informations d'une commande existante.
+
+- **Supprimer une commande** : Permet de supprimer une commande de la base de données.
+
+## Prérequis
+
+- Go (version 1.16 ou supérieure)
+- Git
+
+# Structure
+--db/
+    db.go : Ce fichier contient la logique pour initialiser la base de données SQLite et pour fermer la connexion. Il configure également la table orders pour stocker les commandes.
+
+--handlers/
+    handlers.go : Ce fichier contient les gestionnaires HTTP pour les différentes opérations sur les commandes (créer, lire, mettre à jour, supprimer). Ces gestionnaires traitent les requêtes entrantes et interagissent avec la base de données pour effectuer les opérations nécessaires.
+
+--static/
+    index.html : Page d'accueil de l'application.
+    create_order.html : Formulaire pour créer une nouvelle commande.
+    get_order.html : Page pour récupérer les détails d'une commande spécifique.
+    update_order.html : Formulaire pour mettre à jour une commande existante.
+    delete_order.html : Formulaire pour supprimer une commande.
+    style.css : Fichier CSS pour le style des pages HTML.
+
+--go.mod
+    Fichier de gestion des dépendances Go.
+
+
+# Gestion de la concurrence en Go
+-- Serveur HTTP concurrent en go
+    Go utilise des goroutines pour gérer la concurrence de manière efficace. Chaque requête HTTP est traitée dans sa propre goroutine, ce qui permet au serveur de gérer plusieurs requêtes en parallèle sans bloquer les autres requêtes  
+
+# Requirements
+-- Module de sqLite n'utilisant pas un compilateur : "github.com/glebarez/go-sqlite"
+-- "database/sql"
+-- "net/http"
+-- D'autres modules et packages nécessaires en fonction de la structure et besoin du projet
+
+# Problèmes
+-- Soucis d'incompatibitilité du module sqLite de go
+-- Récupération des données envoyée sur la base de données
+-- Quelques soucis d'incompréhension coté impléméntation au début
+

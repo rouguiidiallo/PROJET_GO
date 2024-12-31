@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Order</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Create Order</h1>
+        <form id="create-order-form">
+            <input type="text" id="customerName" placeholder="Customer Name" required>
+            <input type="text" id="item" placeholder="Item" required>
+            <input type="number" id="quantity" placeholder="Quantity" required>
+            <input type="text" id="status" placeholder="Status" required>
+            <button type="submit">Create Order</button>
+        </form>
+    </div>
+    <script>
+        document.getElementById('create-order-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const customerName = document.getElementById('customerName').value;
+            const item = document.getElementById('item').value;
+            const quantity = document.getElementById('quantity').value;
+            const status = document.getElementById('status').value;
+
+            fetch('/api/orders', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ customerName, item, quantity, status })
+            })
+            .then(response => response.json())
+            .then(data => alert('Order created: ' + JSON.stringify(data)))
+            .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
